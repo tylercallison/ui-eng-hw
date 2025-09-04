@@ -1,55 +1,63 @@
-type File = {
-  name: string;
-  device: string;
-  path: string;
-  status: string;
-};
+'use client';
 
-// Add type to ensure maintainability
-const fileList: File[] = [
-  {
-    name: 'smss.exe',
-    device: 'Mario',
-    path: '\\Device\\HarddiskVolume2\\Windows\\System32\\smss.exe',
-    status: 'scheduled',
-  },
-  {
-    name: 'netsh.exe',
-    device: 'Luigi',
-    path: '\\Device\\HarddiskVolume2\\Windows\\System32\\netsh.exe',
-    status: 'available',
-  },
-  {
-    name: 'uxtheme.dll',
-    device: 'Peach',
-    path: '\\Device\\HarddiskVolume1\\Windows\\System32\\uxtheme.dll',
-    status: 'available',
-  },
-  {
-    name: 'aries.sys',
-    device: 'Daisy',
-    path: '\\Device\\HarddiskVolume1\\Windows\\System32\\aries.sys',
-    status: 'scheduled',
-  },
-  {
-    name: 'cryptbase.dll',
-    device: 'Yoshi',
-    path: '\\Device\\HarddiskVolume1\\Windows\\System32\\cryptbase.dll',
-    status: 'scheduled',
-  },
-  {
-    name: '7za.exe',
-    device: 'Toad',
-    path: '\\Device\\HarddiskVolume1\\temp\\7za.exe',
-    status: 'scheduled',
-  },
-];
+import { compareFiles } from '@/lib/compare-files';
+import { fileList } from '@/lib/file-list';
+import { FileType } from '@/lib/types';
+import { useState } from 'react';
 
 export default function Home() {
+  const [selected, setSelected] = useState<FileType[]>([]);
+
   return (
     <div>
       <header></header>
-      <main></main>
+      <main>
+        <div>
+          <h2>Selected {selected.length}</h2>
+          <button>Download Selected</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Device</th>
+              <th>Path</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {fileList.map((file, index) => (
+              <tr key={index}>
+                <td>
+                  <input
+                    type='checkbox'
+                    onChange={(e) => {
+                      if (e.target.checked) setSelected([...selected, file]);
+                      else
+                        setSelected((old) =>
+                          old.filter((f) => !compareFiles(f, file))
+                        );
+                    }}
+                    disabled={file.status !== 'available'}
+                  />
+                </td>
+                <td>{file.name}</td>
+                <td>{file.device}</td>
+                <td>
+                  <div>
+                    {file.path}
+                    {file.status === 'scheduled' && (
+                      <figure className='rounded-full bg-green-400 h-4 w-4' />
+                    )}
+                  </div>
+                </td>
+                <td>{file.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </main>
       <footer></footer>
     </div>
   );
