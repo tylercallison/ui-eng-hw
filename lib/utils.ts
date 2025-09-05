@@ -1,5 +1,5 @@
-import { CheckboxProps } from '@/components/Checkbox';
-import { GetFileType } from '@/app/api/files/route';
+import { CheckboxProps } from "@/components/Checkbox";
+import { GetFileType } from "@/app/api/files/route";
 
 const compareFiles = (a: GetFileType, b: GetFileType) => {
   return (
@@ -11,10 +11,10 @@ const compareFiles = (a: GetFileType, b: GetFileType) => {
   );
 };
 
-const isChecked = (selected: number, max: number): CheckboxProps['checked'] => {
-  if (selected === 0) return 'false';
-  if (selected === max) return 'true';
-  return 'indeterminate';
+const isChecked = (selected: number, max: number): CheckboxProps["checked"] => {
+  if (selected === 0) return "false";
+  if (selected === max) return "true";
+  return "indeterminate";
 };
 
 export { compareFiles, isChecked };

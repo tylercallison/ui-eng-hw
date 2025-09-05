@@ -1,16 +1,16 @@
-import clsx from 'clsx';
-import { ChangeEventHandler, useRef } from 'react';
+import clsx from "clsx";
+import { ChangeEventHandler, useRef } from "react";
 
 type CheckboxProps = {
-  checked: 'true' | 'false' | 'indeterminate';
+  checked: "true" | "false" | "indeterminate";
   onChange?: ChangeEventHandler<HTMLInputElement>;
   disabled?: boolean;
   className?: string;
   id?: string;
 };
 
-const isIndeterminate = (state: CheckboxProps['checked']) => {
-  return state === 'indeterminate';
+const isIndeterminate = (state: CheckboxProps["checked"]) => {
+  return state === "indeterminate";
 };
 
 const Checkbox = ({
@@ -28,16 +28,16 @@ const Checkbox = ({
 
   return (
     <input
-      type='checkbox'
+      type="checkbox"
       ref={ref}
-      checked={isIndeterminate(checked) ? false : checked === 'true'}
-      aria-checked={isIndeterminate(checked) ? 'mixed' : checked}
+      checked={isIndeterminate(checked) ? false : checked === "true"}
+      aria-checked={isIndeterminate(checked) ? "mixed" : checked}
       onChange={onChange}
       disabled={disabled}
       id={id}
       className={clsx(className, {
-        'cursor-pointer': !disabled,
-        'cursor-not-allowed': disabled,
+        "cursor-pointer": !disabled,
+        "cursor-not-allowed": disabled,
       })}
     />
   );
