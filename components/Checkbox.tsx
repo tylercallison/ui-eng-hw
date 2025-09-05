@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { Check, Minus } from "lucide-react";
 import { ChangeEventHandler, RefObject } from "react";
 
 type CheckboxProps = {
@@ -33,20 +34,38 @@ const Checkbox = ({
   };
 
   return (
-    <input
-      type="checkbox"
-      ref={ref}
-      checked={handleMangedChecked()}
-      aria-checked={isIndeterminate(checked) ? "mixed" : checked}
-      onChange={onChange}
-      readOnly={onChange === undefined}
-      disabled={disabled}
-      id={id}
-      className={clsx(className, {
-        "cursor-pointer": !disabled,
-        "cursor-not-allowed": disabled,
-      })}
-    />
+    <div className="flex">
+      <input
+        type="checkbox"
+        ref={ref}
+        checked={handleMangedChecked()}
+        aria-checked={isIndeterminate(checked) ? "mixed" : checked}
+        onChange={onChange}
+        readOnly={onChange === undefined}
+        disabled={disabled}
+        id={id}
+        className="hidden"
+      />
+      <label
+        htmlFor={id}
+        className={clsx(
+          className,
+          "flex h-6 w-6 items-center justify-center rounded border",
+          {
+            "bg-blue-500": checked !== "false",
+            "cursor-pointer": !disabled,
+            "cursor-not-allowed": disabled,
+          },
+        )}
+      >
+        {checked === "true" && (
+          <Check size={16} stroke="white" strokeWidth={4} />
+        )}
+        {checked === "indeterminate" && (
+          <Minus size={16} stroke="white" strokeWidth={4} />
+        )}
+      </label>
+    </div>
   );
 };
 
