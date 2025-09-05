@@ -5,4 +5,10 @@ type FileType = {
   status: "available" | "scheduled";
 };
 
-export type { FileType };
+type GetFileType = FileType & {
+  id: `${string}-${string}-${string}-${string}-${string}`;
+};
+
+type GetFilesRequestType = { files: GetFileType[] };
+
+export type { FileType, GetFileType, GetFilesRequestType };

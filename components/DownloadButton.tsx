@@ -1,8 +1,8 @@
-import { FileType } from "@/lib/types";
+import { GetFileType } from "@/lib/types";
 import { Download } from "lucide-react";
 
 type DownloadButtonProps = {
-  selected: FileType[];
+  selected: GetFileType[];
 };
 
 const DownloadButton = ({ selected }: DownloadButtonProps) => {

@@ -1,5 +1,9 @@
 import { CheckboxProps } from "@/components/Checkbox";
-import { GetFileType } from "@/app/api/files/route";
+import { GetFileType } from "@/lib/types";
+
+const getRandomInt = (max: number) => {
+  return Math.floor(Math.random() * max);
+};
 
 const compareFiles = (a: GetFileType, b: GetFileType) => {
   return (
@@ -17,4 +21,4 @@ const isChecked = (selected: number, max: number): CheckboxProps["checked"] => {
   return "indeterminate";
 };
 
-export { compareFiles, isChecked };
+export { compareFiles, isChecked, getRandomInt };

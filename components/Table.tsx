@@ -5,7 +5,7 @@ import { Checkbox } from "./Checkbox";
 import { DownloadButton } from "./DownloadButton";
 import { TableRow, TableRowProps } from "./TableRow";
 import { useState, ChangeEvent, useRef } from "react";
-import { GetFileType } from "@/app/api/files/route";
+import { GetFileType } from "@/lib/types";
 
 type TableProps = {
   files: GetFileType[];

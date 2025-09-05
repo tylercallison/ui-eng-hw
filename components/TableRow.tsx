@@ -2,7 +2,7 @@ import { Checkbox, CheckboxProps } from "./Checkbox";
 import { Dispatch, SetStateAction, useRef } from "react";
 import { TableCell } from "./TableCell";
 import clsx from "clsx";
-import { GetFileType } from "@/app/api/files/route";
+import { GetFileType } from "@/lib/types";
 import { compareFiles } from "@/lib/utils";
 
 type TableRowProps = {
