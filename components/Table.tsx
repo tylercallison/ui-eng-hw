@@ -1,27 +1,30 @@
 'use client';
 
-import { fileList } from '@/lib/file-list';
 import { isChecked, compareFiles } from '@/lib/utils';
 import { Checkbox } from './Checkbox';
 import { DownloadButton } from './DownloadButton';
 import { TableRow, TableRowProps } from './TableRow';
-import { FileType } from '@/lib/types';
 import { useState, ChangeEvent } from 'react';
+import { GetFileType } from '@/app/api/files/route';
 
-const Table = () => {
-  const [selected, setSelected] = useState<FileType[]>([]);
+type TableProps = {
+  files: GetFileType[];
+};
 
-  const maxSelectable = fileList.filter((f) => f.status === 'available').length;
+const Table = ({ files }: TableProps) => {
+  const [selected, setSelected] = useState<GetFileType[]>([]);
+
+  const maxSelectable = files.filter((f) => f.status === 'available').length;
 
   const selectAllToggle = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked)
-      setSelected(fileList.filter((f) => f.status === 'available'));
+      setSelected(files.filter((f) => f.status === 'available'));
     else setSelected([]);
   };
 
   const handleRowOnChange = (
     e: ChangeEvent<HTMLInputElement>,
-    file: FileType
+    file: GetFileType
   ) => {
     if (e.target.checked) setSelected([...selected, file]);
     else setSelected((old) => old.filter((f) => !compareFiles(f, file)));
@@ -56,9 +59,9 @@ const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {fileList.map((file, index) => (
+          {files.map((file, index) => (
             <TableRow
-              key={index}
+              key={file.id}
               file={file}
               index={index}
               onChange={(e) => handleRowOnChange(e, file)}
