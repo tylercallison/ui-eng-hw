@@ -12,6 +12,7 @@ const DownloadButton = ({ selected }: DownloadButtonProps) => {
         alert(selected.map((f) => `${f.device}: ${f.path}`).join('\n'))
       }
       disabled={selected.length === 0}
+      className='flex items-center justify-center gap-2 cursor-pointer rounded hover:bg-gray-100 p-2 text-xl disabled:cursor-not-allowed'
     >
       <Download />
       Download Selected

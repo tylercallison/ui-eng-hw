@@ -22,9 +22,9 @@ export default function Home() {
     <>
       <header></header>
       <main className='flex flex-col mx-auto container h-full justify-center'>
-        <div className='flex flex-col p-4 border border-gray-200'>
-          <div className='flex items-center gap-8 mb-4'>
-            <div className='flex items-center justify-center gap-2'>
+        <div className='flex flex-col border border-gray-200'>
+          <div className='flex items-center gap-8 m-4'>
+            <div className='flex items-center justify-center gap-2 text-xl'>
               <Checkbox
                 checked={isChecked(selected.length, maxSelectable)}
                 onChange={selectAllToggle}
@@ -38,18 +38,21 @@ export default function Home() {
           </div>
           <table>
             <thead>
-              <tr>
+              <tr className='border-t border-gray-200'>
                 <th></th>
-                <th>Name</th>
-                <th>Device</th>
-                <th>Path</th>
-                <th>Status</th>
+                <th className='text-start text-lg py-4'>Name</th>
+                <th className='text-start text-lg py-4'>Device</th>
+                <th className='text-start text-lg py-4'>Path</th>
+                <th className='text-start text-lg py-4'>Status</th>
               </tr>
             </thead>
             <tbody>
               {fileList.map((file, index) => (
-                <tr key={index}>
-                  <td>
+                <tr
+                  key={index}
+                  className='border-t border-gray-200 hover:bg-gray-100 has-checked:bg-gray-200'
+                >
+                  <td className='p-4'>
                     <Checkbox
                       checked={
                         selected.some((f) => compareFiles(f, file))
@@ -66,17 +69,15 @@ export default function Home() {
                       disabled={file.status !== 'available'}
                     />
                   </td>
-                  <td>{file.name}</td>
-                  <td>{file.device}</td>
-                  <td>
-                    <div>
-                      {file.path}
-                      {file.status === 'available' && (
-                        <figure className='rounded-full bg-green-400 h-4 w-4' />
-                      )}
-                    </div>
+                  <td className='py-4'>{file.name}</td>
+                  <td className='py-4 '>{file.device}</td>
+                  <td className='flex items-center justify-between gap-2 py-4'>
+                    {file.path}
+                    {file.status === 'available' && (
+                      <figure className='rounded-full bg-green-400 h-6 w-6 mr-2' />
+                    )}
                   </td>
-                  <td className='capitalize'>{file.status}</td>
+                  <td className='py-4 capitalize'>{file.status}</td>
                 </tr>
               ))}
             </tbody>
