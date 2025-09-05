@@ -4,7 +4,7 @@ import { isChecked, compareFiles } from "@/lib/utils";
 import { Checkbox } from "./Checkbox";
 import { DownloadButton } from "./DownloadButton";
 import { TableRow, TableRowProps } from "./TableRow";
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useRef } from "react";
 import { GetFileType } from "@/app/api/files/route";
 
 type TableProps = {
@@ -13,6 +13,7 @@ type TableProps = {
 
 const Table = ({ files }: TableProps) => {
   const [selected, setSelected] = useState<GetFileType[]>([]);
+  const selectAllRef = useRef<HTMLInputElement>(null);
 
   const maxSelectable = files.filter((f) => f.status === "available").length;
 
@@ -22,14 +23,6 @@ const Table = ({ files }: TableProps) => {
     else setSelected([]);
   };
 
-  const handleRowOnChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    file: GetFileType,
-  ) => {
-    if (e.target.checked) setSelected([...selected, file]);
-    else setSelected((old) => old.filter((f) => !compareFiles(f, file)));
-  };
-
   return (
     <div className="flex flex-col overflow-x-scroll border border-gray-200">
       <div className="m-4 flex items-center gap-8">
@@ -37,6 +30,7 @@ const Table = ({ files }: TableProps) => {
           <Checkbox
             checked={isChecked(selected.length, maxSelectable)}
             onChange={selectAllToggle}
+            ref={selectAllRef}
             id="select-all"
           />
           <label htmlFor="select-all" className="cursor-pointer">
@@ -64,7 +58,7 @@ const Table = ({ files }: TableProps) => {
               key={file.id}
               file={file}
               index={index}
-              onChange={(e) => handleRowOnChange(e, file)}
+              setSelected={setSelected}
               checked={
                 selected.some((f) => compareFiles(f, file)) ? "true" : "false"
               }

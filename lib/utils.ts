@@ -12,8 +12,8 @@ const compareFiles = (a: GetFileType, b: GetFileType) => {
 };
 
 const isChecked = (selected: number, max: number): CheckboxProps["checked"] => {
-  if (selected === 0) return "false";
-  if (selected === max) return "true";
+  if (selected <= 0) return "false";
+  if (selected >= max) return "true";
   return "indeterminate";
 };
 

@@ -1,12 +1,13 @@
 import clsx from "clsx";
-import { ChangeEventHandler, useRef } from "react";
+import { ChangeEventHandler, RefObject } from "react";
 
 type CheckboxProps = {
-  checked: "true" | "false" | "indeterminate";
+  checked?: "true" | "false" | "indeterminate";
   onChange?: ChangeEventHandler<HTMLInputElement>;
   disabled?: boolean;
   className?: string;
   id?: string;
+  ref?: RefObject<HTMLInputElement | null>;
 };
 
 const isIndeterminate = (state: CheckboxProps["checked"]) => {
@@ -19,20 +20,26 @@ const Checkbox = ({
   disabled,
   className,
   id,
+  ref,
 }: CheckboxProps) => {
-  const ref = useRef<HTMLInputElement>(null);
-
-  if (ref.current) {
+  if (ref?.current) {
     ref.current.indeterminate = isIndeterminate(checked);
   }
+
+  const handleMangedChecked = () => {
+    if (checked === undefined) return undefined;
+
+    return isIndeterminate(checked) ? false : checked === "true";
+  };
 
   return (
     <input
       type="checkbox"
       ref={ref}
-      checked={isIndeterminate(checked) ? false : checked === "true"}
+      checked={handleMangedChecked()}
       aria-checked={isIndeterminate(checked) ? "mixed" : checked}
       onChange={onChange}
+      readOnly={onChange === undefined}
       disabled={disabled}
       id={id}
       className={clsx(className, {
