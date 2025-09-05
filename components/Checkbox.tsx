@@ -6,6 +6,7 @@ type CheckboxProps = {
   onChange?: ChangeEventHandler<HTMLInputElement>;
   disabled?: boolean;
   className?: string;
+  id?: string;
 };
 
 const isIndeterminate = (state: CheckboxProps['checked']) => {
@@ -17,6 +18,7 @@ const Checkbox = ({
   onChange,
   disabled,
   className,
+  id,
 }: CheckboxProps) => {
   const ref = useRef<HTMLInputElement>(null);
 
@@ -32,6 +34,7 @@ const Checkbox = ({
       aria-checked={isIndeterminate(checked) ? 'mixed' : checked}
       onChange={onChange}
       disabled={disabled}
+      id={id}
       className={clsx(className, {
         'cursor-pointer': !disabled,
         'cursor-not-allowed': disabled,

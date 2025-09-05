@@ -22,16 +22,19 @@ export default function Home() {
     <>
       <header></header>
       <main className='flex flex-col mx-auto container h-full justify-center'>
-        <div className='flex flex-col border border-gray-200'>
+        <div className='flex flex-col border border-gray-200 overflow-x-scroll'>
           <div className='flex items-center gap-8 m-4'>
             <div className='flex items-center justify-center gap-2 text-xl'>
               <Checkbox
                 checked={isChecked(selected.length, maxSelectable)}
                 onChange={selectAllToggle}
+                id='select-all'
               />
-              {selected.length === 0
-                ? 'None Selected'
-                : `Selected ${selected.length}`}
+              <label htmlFor='select-all' className='cursor-pointer'>
+                {selected.length === 0
+                  ? 'None Selected'
+                  : `Selected ${selected.length}`}
+              </label>
             </div>
 
             <DownloadButton selected={selected} />
