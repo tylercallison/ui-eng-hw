@@ -2,6 +2,7 @@ import { Checkbox, CheckboxProps } from "./Checkbox";
 import { ChangeEventHandler } from "react";
 import { FileType } from "@/lib/types";
 import { TableCell } from "./TableCell";
+import clsx from "clsx";
 
 type TableRowProps = {
   file: FileType;
@@ -11,17 +12,20 @@ type TableRowProps = {
 };
 
 const TableRow = ({ file, index, onChange, checked }: TableRowProps) => {
+  const disabled = file.status !== "available";
+
   return (
     <tr
       key={index}
-      className="border-t border-gray-200 hover:bg-gray-50 has-checked:bg-gray-100 dark:hover:bg-gray-900 dark:has-checked:bg-gray-800"
+      className={clsx(
+        "border-t border-gray-200 has-checked:bg-gray-100 dark:hover:bg-gray-900 dark:has-checked:bg-gray-800",
+        {
+          "hover:bg-gray-50": !disabled,
+        },
+      )}
     >
       <TableCell className="p-4">
-        <Checkbox
-          checked={checked}
-          onChange={onChange}
-          disabled={file.status !== "available"}
-        />
+        <Checkbox checked={checked} onChange={onChange} disabled={disabled} />
       </TableCell>
       <TableCell>{file.name}</TableCell>
       <TableCell>{file.device}</TableCell>
