@@ -49,10 +49,10 @@ const Table = () => {
         <thead>
           <tr className='border-t border-gray-200'>
             <th></th>
-            <th className='text-start text-lg py-4'>Name</th>
-            <th className='text-start text-lg py-4'>Device</th>
-            <th className='text-start text-lg py-4'>Path</th>
-            <th className='text-start text-lg py-4'>Status</th>
+            <th className='text-start font-normal text-lg py-4'>Name</th>
+            <th className='text-start font-normal text-lg py-4'>Device</th>
+            <th className='text-start font-normal text-lg py-4'>Path</th>
+            <th className='text-start font-normal text-lg py-4'>Status</th>
           </tr>
         </thead>
         <tbody>

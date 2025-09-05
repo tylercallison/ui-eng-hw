@@ -14,7 +14,7 @@ const TableRow = ({ file, index, onChange, checked }: TableRowProps) => {
   return (
     <tr
       key={index}
-      className='border-t border-gray-200 hover:bg-gray-100 has-checked:bg-gray-200'
+      className='border-t border-gray-200 hover:bg-gray-50 has-checked:bg-gray-100'
     >
       <TableCell className='p-4'>
         <Checkbox
