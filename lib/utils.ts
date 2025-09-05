@@ -1,5 +1,6 @@
 import { CheckboxProps } from "@/components/Checkbox";
-import { GetFileType } from "@/lib/types";
+import { FileType, GetFileType } from "@/lib/types";
+import { randomUUID } from "crypto";
 
 const getRandomInt = (max: number) => {
   return Math.floor(Math.random() * max);
@@ -21,4 +22,8 @@ const isChecked = (selected: number, max: number): CheckboxProps["checked"] => {
   return "indeterminate";
 };
 
-export { compareFiles, isChecked, getRandomInt };
+const addUuidToFiles = (fileList: FileType[]) => {
+  return fileList.map((file) => ({ ...file, id: randomUUID() }));
+};
+
+export { compareFiles, isChecked, getRandomInt, addUuidToFiles };
