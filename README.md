@@ -20,17 +20,15 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## Testing
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run test
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- This was created using Next.js, Tailwind, and Jest.
+- Non "available" files should be disabled. This included disbling hover states and ability to toggle due to UX considerations
+- Jest was used for testing to ensure requirements are met programatically
+- The table was broken into reusable components where logical based on repeated elements. In the event of a component library, these would have been more genaric following a similar pattern to [Shadcn](https://ui.shadcn.com/docs/components/table) (built on Radix). Where each element of a table are componentized. For single use of an element a component was not created for this purpose.
