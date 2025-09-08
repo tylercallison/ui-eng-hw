@@ -64,7 +64,7 @@ describe("Table Component", () => {
     expect(downloadButton).not.toBeDisabled();
   });
 
-  it("select all is indeterminant when all selectable list items are selected", () => {
+  it("select all is indeterminant when some selectable list items are selected", () => {
     render(<Table files={addUuidToFiles(fileList)} />);
 
     const selectAll = screen.getByRole<HTMLInputElement>("checkbox", {
